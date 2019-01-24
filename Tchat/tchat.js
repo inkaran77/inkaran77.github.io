@@ -123,7 +123,7 @@ updated: function(){
   
   methods: {
       postMessage: function (){
-          this.$http.post('http://miagetchat.ovh:8080/MiageTchat/webapi/Message',"",{headers: {
+          this.$http.post('https://miagetchat.ovh:8181/MiageTchat/webapi/Message',"",{headers: {
             'Authorization': 'Bearer '+ this.token,
             'Message': this.msg,
   
