@@ -13,7 +13,7 @@ var online = new Vue({
 
 methods: {
     getUsersOnline: function (){
-        this.$http.get('http://miagetchat.ovh:8080/MiageTchat/webapi/Utilisateurs/Online',{headers:{
+        this.$http.get('https://miagetchat.ovh:8181/MiageTchat/webapi/Utilisateurs/Online',{headers:{
         'Authorization': 'Bearer '+ localStorage.getItem('my_token')
 
         // Ok
@@ -32,7 +32,7 @@ methods: {
     },
 
     deconnexion: function(){
-         this.$http.get('http://miagetchat.ovh:8080/MiageTchat/webapi/Connexion/off',{headers:{
+         this.$http.get('https://miagetchat.ovh:8181/MiageTchat/webapi/Connexion/off',{headers:{
              'Authorization': 'Bearer '+ localStorage.getItem('my_token')
           }})
 
@@ -49,7 +49,7 @@ methods: {
         // }).then(result =>{
 
         //     if (result.value){
-        //         this.$http.get('http://miagetchat.ovh:8080/MiageTchat/webapi/Connexion/Off',{headers:{
+        //         this.$http.get('https://miagetchat.ovh:8181/MiageTchat/webapi/Connexion/Off',{headers:{
         //             'Authorization': 'Bearer '+ localStorage.getItem('my_token')}})
         //  localStorage.setItem('my_token', "") // supprime le token dans localstorage        
         //  window.location.href = '../Connexion/index.html'
@@ -79,7 +79,7 @@ var tchat = new Vue({
   
   methods: {
       getMessage: function (){
-          this.$http.get('http://miagetchat.ovh:8080/MiageTchat/webapi/Message',{headers: {
+          this.$http.get('https://miagetchat.ovh:8181/MiageTchat/webapi/Message',{headers: {
             'Authorization': 'Bearer '+ localStorage.getItem('my_token'),
             'MsgId': localStorage.getItem('last_msg_id'),
   

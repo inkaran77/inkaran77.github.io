@@ -14,7 +14,7 @@ var register = new Vue({
 
     methods: {
         inscription: function (){
-            this.$http.post('http://miagetchat.ovh:8080/MiageTchat/webapi/Inscription',"",{headers:{
+            this.$http.post('https://miagetchat.ovh:8181/MiageTchat/webapi/Inscription',"",{headers:{
                 UserId: this.id,
                 First_Name: this.firstname,
                 Last_Name: this.lastname,
