@@ -32,41 +32,42 @@ methods: {
     },
 
     deconnexion: function(){
-         this.$http.get('https://miagetchat.ovh:8181/MiageTchat/webapi/Connexion/off',{headers:{
-             'Authorization': 'Bearer '+ localStorage.getItem('my_token')
-          }})
-
-        localStorage.setItem('my_token', "") // supprime le token dans localstorage  
-        window.location.href = '../Connexion/index.html'
-      
-        // Swal.fire({
-        // title: this.id,
-        // text: 'Êtes-vous sûr de vouloir vous déconnecter?',
-        // type: 'warning',
-        // showCancelButton: true,
-        // confirmButtonText:'Oui',
-        // cancelButtonText: 'Non',
-        // }).then(result =>{
-
-        //     if (result.value){
-        //         this.$http.get('https://miagetchat.ovh:8181/MiageTchat/webapi/Connexion/Off',{headers:{
-        //             'Authorization': 'Bearer '+ localStorage.getItem('my_token')}})
-        //  localStorage.setItem('my_token', "") // supprime le token dans localstorage        
-        //  window.location.href = '../Connexion/index.html'
-        // }
-        // })
-
-    },
+         
+            Swal.fire({
+                title: this.id,
+                text: 'Êtes-vous sûr de vouloir vous déconnecter?',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonText:'Oui',
+                cancelButtonText: 'Non',
+                }).then(result =>{
+        
+                    if (result.value){
+                        this.$http.get('https://miagetchat.ovh:8181/MiageTchat/webapi/Connexion/Off',{headers:{
+                        'Authorization': 'Bearer '+ localStorage.getItem('my_token')
+                        
+                        }}).then(response => {
+                            window.location.href = '../Connexion/index.html'
+                        
+                          // Error
+                        },response  => {
+                            if(response.status==400){
+                                console.log("Erreur")
+                            }
+                        });
+                    }
+                })
+                
+        },                
 },
-
+        
 created: function(){
     this.getUsersOnline()
-},
+    },
 
 updated(){
   this.getUsersOnline()
-},
-
+    },
 
 })  
 
