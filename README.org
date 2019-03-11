@@ -1,321 +1,69 @@
-#+TITLE: Projet MiageTch@t Front
-[[file:./logo.png]]
-#+OPTIONS: \n:t
+#+TITLE: Projet Record Your Course
+
+
+
 * Table of Contents                                       :TOC_4_gh:noexport:
 - [[#team][Team]]
 - [[#contexte][Contexte]]
-- [[#avancement-du-projet][Avancement du projet]]
-- [[#contrat-daccès][Contrat d'accès]]
-  - [[#ressource][Ressource]]
-    - [[#ressource-1][Ressource]]
-  - [[#accès][Accès]]
-    - [[#connexion][Connexion]]
-    - [[#inscription][Inscription]]
-    - [[#déconnexion][Déconnexion]]
-  - [[#compte][Compte]]
-    - [[#getcompte][GetCompte]]
-    - [[#updatecompte][UpdateCompte]]
-    - [[#deletecompte][DeleteCompte]]
-  - [[#message][Message]]
-    - [[#postmessage][PostMessage]]
-    - [[#getmessage][GetMessage]]
-  - [[#acceuil][Acceuil]]
-    - [[#getallusers][GetAllUsers]]
-    - [[#getusersonline][GetUsersOnline]]
+- [[#enregistrer-votre-cours-avec-webrtc][Enregistrer votre cours avec WebRTC]]
+- [[#lancement-de-lenregistrement-du-cours][Lancement de l'enregistrement du cours]]
+- [[#annoter-votre-cours-avec-timesheets][Annoter votre cours avec TimeSheets]]
+- [[#lancement-de-lannotations-du-cours-enregisté][Lancement de l'annotations du cours enregisté]]
 
 * Team
 - Ganeistan
 - Inkaran
 
 * Contexte
-Nous avons choisi parmi les projets disponibles (Dames, Jeux etc..),le projet MiageTchat qui est un tchat online like MSN public.
+L'objectif du projet est de permettre à un enseignant d'enregistrer son cours en capturant son écran ainsi que sa voix et son visage via sa webcam.
 
-* Avancement du projet
-| Fontionnalité  | Back      | Front   | Test |
-|----------------+-----------+---------+------|
-| *Ressource*    |           |         |      |
-| Ressource      | Ganeistan | Inkaran | OK   |
-|----------------+-----------+---------+------|
-| *Accès*        |           |         |      |
-| Connexion      | Ganeistan | Inkaran | OK   |
-| Inscription    | Ganeistan | Inkaran | OK   |
-| Déconnexion    | Ganeistan | Inkaran |      |
-|----------------+-----------+---------+------|
-| *Compte*       |           |         |      |
-| GetCompte      | Ganeistan | Inkaran | OK   |
-| UpdateCompte   | Ganeistan | Inkaran | OK   |
-| DeleteCompte   | Ganeistan | Inkaran | OK   |
-|----------------+-----------+---------+------|
-| *Message*      |           |         |      |
-| PostMessage    | Ganeistan | Inkaran | OK   |
-| GetMessage     | Ganeistan | Inkaran | OK   |
-|----------------+-----------+---------+------|
-| *Acceuil*      |           |         |      |
-| GetAllUsers    | Ganeistan | Inkaran | OK   |
-| GetUsersOnline | Ganeistan | Inkaran |      |
-|----------------+-----------+---------+------|
-| À venir        |           |         |      |
-| ...            | Ganeistan | Inkaran |      |
+* Enregistrer votre cours avec WebRTC
+Nous avont utilisé la technologie WebRTC et sa bibliothéque pour enregistrer l'écran de l'utilisateur et sa webcam.
 
-* Contrat d'accès
-** Ressource
-*** Ressource
-  - Return : http code + les méthodes format json
-   - Url : [[http://miagetchat.ovh:8080/MiageTchat/webapi/Ressource]]
-   - Method : =GET=
-   - Required :
-   - Success Response :
-     - Code : =200=
-     - Content :
-            {
+* Lancement de l'enregistrement du cours
+  #+ATTR_LATEX: :width 0.4\textwidth :placement [h]
+   [[./main/images/capture3.png]]
 
-            "Function": [
+ 1. Sélectionnez dans le dossier main le fichier index.html et lancez-le.
 
-              {
-               "Lien":  "http://localhost:5000/MiageTchat/Connexion",
-               
-               "Mot-cle": "Connexion",
-               
-               "Verbe" :"GET"
-               
-              },
-              
-              {
-               "Lien":  "http://localhost:5000/MiageTchat/Inscription",
+ 2. Cliquez sur  [[./main/images/play.png]]  pour démarrer l'enregistrement.
 
-               "Mot-cle": "Inscription",
+ 3. Cliquez ensuite sur  [[./main/images/stop.png]]  pour stopper l'enregistrement.
 
-               "Verbe":"POST"
-               
-               },
+ 4. Cliquez sur  [[./main/images/points.png]]  puis sur télécharger.
 
-               {
-
-               "Lien":  "http://localhost:5000/MiageTchat/Compte",
-               
-               "Mot-cle": "GetCompte",
-               
-               "Verbe": "GET" 
-               
-               }
-            ]
-   - Error Response 1 :
-     - Code : =400 BAD REQUEST=
-     - Content : =Erreur=
-
-** Accès
-*** Connexion
-   - Return : =un bearer token ou une http code erreur=
-   - Url :[[http://miagetchat.ovh:8080/MiageTchat/webapi/Connexion]]
-   - Method : =GET=
-   - Required : =Id=[String]=  =Password=[String]=
-   - Success Response :
-     - Code : =200=
-     - Content : =Bearer Token=
-                 =MsgId=[Int]=
-   - Error Response 1 :
-     - Code : =404 NOT FOUND=
-     - Content : =L'utilisateur n'existe pas=
-   - Error Response 2 :
-     - Code : =400 BAD REQUEST=
-     - Content : =Mot de passe erroné=
-
-*** Inscription
-   - Return : http code
-   - Url : [[http://miagetchat.ovh:8080/MiageTchat/webapi/Inscription]]
-   - Method : =POST=
-   - Required :
-          =UserId=[String]=
-          =First_Name=[String]=
-          =Last_Name=[String]=
-          =Birth_Year=[String]=
-          =Gender=[String]=
-          =Email=[String]=
-          =Password=[String]=
-   - Success Response :
-     - Code : =200=
-     - Content : =Félicitations, vous êtes bien inscrit=
-   - Error Response 1 :
-     - Code : =400 BAD REQUEST=
-     - Content : =ID déja utilisé=
-
-*** Déconnexion
-   - Return : =un bearer token ou une http code erreur=
-   - Url :[[http://miagetchat.ovh:8080/MiageTchat/webapi/Connexion/Off]]
-   - Method : =GET=
-   - Required :
-           =Bearer Token=
-   - Su
-ccess Response :
-     - Code : =200=
-   - Error Response 1 :
-     - Code : =400 BAD REQUEST=
-     - Content : =Mot de passe erroné=
+ 5. Cliquez sur  [[./main/images/timesheets.png]]  pour passer à l'annontation.  
 
 
-** Compte
-*** GetCompte
-   - Return : http code + user data in json
-   - Url : [[http://miagetchat.ovh:8080/MiageTchat/webapi/Compte]]
-   - Method : =GET=
-   - Required :
-           =Bearer Token=
-   - Success Response :
-     - Code : =200=
-     - Content : =user=
-   - Error Response 1 :
-     - Code : =401 Unauthorized=
+# | [[./main/images/play.png]]       | 1. Cliquez sur l'icône pour démarrer l'enregistrement   |
+# | [[./main/images/stop.png]]       | 2. Cliquez ensuite sur l'icône  pour stopper l'enregistrement  |
+# | [[./main/images/play.png]]       | 3. Cliquez sur pour télécharger la vidéo  |
+# | [[./main/images/timesheets.png]] |  4. Cliquez sur pour passer à l'annontation  |
 
 
-*** UpdateCompte
-   - Return : http code + message
-   - Url : [[http://miagetchat.ovh:8080/MiageTchat/webapi/Compte]]
-   - Method : =PUT=
-   - Required :
-          =Bearer Token=
-           =UserId=[String]=
-           =First_Name=[String]=
-           =Last_Name=[String]=
-           =Birth_date=[String]=
-           =Gender=[String]=
-           =Email=[String]=
-           =Password=[String]=
-   - Success Response :
-     - Code : =200=
-     - Content : =Compte mise à jour=
-   - Error Response 1 :
-     - Code : =401 Unauthorized=
-
-*** DeleteCompte
-   - Return : http code + liste des photos
-   - Url : [[http://miagetchat.ovh:8080/MiageTchat/webapi/Compte]]
-   - Method : =DELETE=
-   - Required :
-           =Bearer Token=
-            =UserId=[String]=
-
-   - Success Response :
-    - Code : =200=
-    - Content : =Votre profil est bien supprimé=
-   - Error Response 1 :
-     - Code : =400 BAD REQUEST=
-     - Content : =Aucune modification effectué=
-
-** Message
-*** PostMessage
-   - Description : Pour envoyer un message sur le fil public
-   - Return : http code
-   - Url : [[http://miagetchat.ovh:8080/MiageTchat/webapi/Message]]
-   - Method : =POST=
-   - Required :
-     =Bearer Token=
-          =Message=[String]=
-
-   - Success Response :
-     - Code : =200=
-     - Content : =Votre message a été envoyer=
-   - Error Response 1 :
-     - Code : =400 BAD REQUEST=
-     - Content : =Erreur=
-
-*** GetMessage
-   - Return : http code + message
-   - Url : [[http://miagetchat.ovh:8080/MiageTchat/webapi/Message]]
-   - Method : =GET=
-   - Required :
-          =Bearer Token=
-          =MsgId=[Int]=
-   - Success Response :
-     - Code : =200=
-     - Content : 
-         {
-      
-              "Messages": [
-               
-              { 
-                "UserId":  "Inkaran",
-                "Message": "Salut",
-                "Date_Hour":"27/06/06 21:36",
-                "MsgId":"33"
-              },
-
-              {
-                "UserId":  "Ganeis",
-                "Message": "Super",
-                "Date_Hour":"27/06/06 21:37",
-                "MsgId":"34"
-              },
-
-              {
-               "UserId":  "Inkaran",
-               "Message": "Sava",
-               "Date_Hour":"27/06/06 21:39",
-               "MsgId":"35"
-              }
-           
-            ]
-         }
-   - Success Response :
-    - Code : =201=
-    - Content : =Pas de nouveau message=
-    - Error Response 1 :
-     - Code : =400 BAD REQUEST=
-     - Content : =Erreur=
 
 
-** Acceuil
-*** GetAllUsers
-   - Return : http code + tous users
-   - Url : [[http://miagetchat.ovh:8080/MiageTchat/webapi/Utilisateurs]]
-   - Method : =GET=
-   - Required :
-          =Bearer Token=
-   - Success Response :
-     - Code : =200=
-     - Content :
-         {
-            "Users": [
-     
-               {
-                "UserId":  "Inkaran" 
-               },
+* Annoter votre cours avec TimeSheets 
+Nous avons utilisé la technologie TimeSheets et sa bibliothéque pour pouvoir donner la possibilité à l'utilisateur de faire une table des matiéres à  son cours.
+Pour rendre la saisie et générer une table des matiéres dynamique, nous avons fait appel à Vue.js .
 
-               {
-                "UserId":  "Ganeis"
-                },
 
-               {
-               "UserId":  "Kevin"
-               }
 
-            ]
-         }
-   - Error Response 1 :
-     - Code : =400 BAD REQUEST=
-     - Content : =Erreur=
+* Lancement de l'annotations du cours enregisté 
+   #+ATTR_LATEX: :width 0.2\textwidth :placement [h]
+   # +CAPTION:
+   #+LABEL: cr-model
+   [[./main/images/capture4.png]]
 
-*** GetUsersOnline
-   - Return : http code + tous users online
-   - Url : [[http://miagetchat.ovh:8080/MiageTchat/webapi/Utilisateurs/Online]]
-   - Method : =GET=
-   - Required :
-          =Bearer Token=
-   - Success Response :
-     - Code : =200=
-     - Content :
-         {
-            "Users": [
-     
-               {
-                "UserId":  "Inkaran" 
-               },
 
-               {
-                "UserId":  "Ganeis"
-                }
+1. Cliquez sur  [[./record-your-course-timesheets/images/timesheets.png]]  pour annonter la vidéo.
 
-            ]
-         }
-   - Error Response 1 :
-     - Code : =400 BAD REQUEST=
-     - Content : =Erreur=
+2. Saisir le nom de la partie et dans le format 00:00 le temps à laquelle démarre cette partie. 
+
+3. Répétez les parties étapes 1 et 2 autant de fois que vous avez de parties.
+
+4. Cliquez ensuite sur   [[./record-your-course-timesheets/images/sync1.png]]  pour synchroniser la saisie.
+
+5. Cliquez sur  [[./record-your-course-timesheets/images/play1.png]]  pour sélectionner la vidéo du cours.
+
+6. Voilà c'est terminé si vous voulez effacer les données saisies cliquez sur  [[./record-your-course-timesheets/images/clear1.png]] 
